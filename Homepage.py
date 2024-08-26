@@ -20,7 +20,9 @@ if prompt := st.chat_input():
         st.info("Please add your OpenAI API key to continue.")
         st.stop()
 
-    client = OpenAI(api_key=openai_api_key)
+    client = OpenAI(api_key='0',
+                   base_url='http://10.0.1.196:1080/llm/v1'
+                   )
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").write(prompt)
     response = client.chat.completions.create(model="gpt-3.5-turbo", messages=st.session_state.messages)
